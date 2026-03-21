@@ -58,13 +58,3 @@ cd frontend
 npm install
 npm run dev
 ```
-
-The frontend dev server proxies API requests to the backend on port 8000.
-
-## Team
-
-| Name             | Role                                      |
-| ---------------- | ----------------------------------------- |
-| Tala Kherawish   | Chief AI Research Scientist & Lead Architect |
-| Qais Alqrem      | Machine Learning Engineer                 |
-| Rand Tabakhna    | Neural Data Specialist & Analyst          |
