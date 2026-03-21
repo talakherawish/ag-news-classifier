@@ -19,8 +19,6 @@ from fastapi.staticfiles import StaticFiles
 import os
 
 app = FastAPI()
-
-# Enable CORS for frontend
 app.add_middleware(
     CORSMiddleware,
     allow_origins=["*"],
@@ -28,9 +26,6 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-# Serve PDFs from the root directory
-# We can't mount the whole root because of security, so let's serve specific files or a folder.
-# Actually, let's just create a route to return the file.
 from fastapi.responses import FileResponse
 
 @app.get("/files/{file_name}")
@@ -40,7 +35,6 @@ async def get_file(file_name: str):
         return FileResponse(file_path)
     raise HTTPException(status_code=404, detail="File not found")
 
-# Global store for models and results
 state = {
     "is_training": False,
     "logs": [],
@@ -69,16 +63,14 @@ def run_training():
         state["results"] = None
         
         state["logs"].append("Loading dataset...")
-        # 1. Load Dataset
-        dataset = load_dataset("wangrongsheng/ag_news")
-        df = pd.DataFrame(dataset["train"]) # Using full dataset to match main.py
+
+        dataset = load_dataset("wangrongsheng/ag_news") #loading news dataset
+        df = pd.DataFrame(dataset["train"])
         
         state["logs"].append("Preprocessing text...")
-        # Preprocessing
-        df["text"] = df["text"].apply(clean_text)
+        df["text"] = df["text"].apply(clean_text) #cleanng text
         
-        state["logs"].append("Vectorizing text with TF-IDF...")
-        # Vectorization
+        state["logs"].append("Vectorizing text with TF-IDF...") # vectorization
         vectorizer = TfidfVectorizer(stop_words="english", max_features=5000)
         X = vectorizer.fit_transform(df["text"])
         y = df["label"]

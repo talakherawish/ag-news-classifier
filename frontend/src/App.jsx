@@ -4,11 +4,9 @@ import {
     Cpu,
     BarChart3,
     Play,
-    CircleDot,
     RefreshCcw,
     ChevronRight,
     ShieldCheck,
-    Zap,
     Activity,
     Trees,
     X
@@ -18,9 +16,6 @@ import './App.css';
 const App = () => {
     const [loading, setLoading] = useState(false);
     const [status, setStatus] = useState({ is_training: false, logs: [], has_results: false, results: null, plot_url: null });
-    const [inputText, setInputText] = useState("");
-    const [prediction, setPrediction] = useState(null);
-    const [predicting, setPredicting] = useState(false);
     const [hasClickedTrain, setHasClickedTrain] = useState(false);
     const [viewerUrl, setViewerUrl] = useState(null);
     const [showAbout, setShowAbout] = useState(false);
@@ -50,25 +45,7 @@ const App = () => {
     const handleTrain = async () => {
         setHasClickedTrain(true);
         setLoading(true);
-        setPrediction(null);
         await fetch('/api/train', { method: 'POST' });
-    };
-
-    const handlePredict = async () => {
-        if (!inputText) return;
-        setPredicting(true);
-        try {
-            const res = await fetch('/api/predict', {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text: inputText })
-            });
-            const data = await res.json();
-            setPrediction(data);
-        } catch (e) {
-            console.error(e);
-        }
-        setPredicting(false);
     };
 
     const ReportTable = ({ report }) => {
