@@ -2,10 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import {
     Cpu,
-    BarChart3,
     Play,
     RefreshCcw,
-    ChevronRight,
     ShieldCheck,
     Activity,
     Trees,
@@ -84,7 +82,7 @@ const App = () => {
             <nav className="navbar">
                 <div className="logo">
                     <Cpu className="logo-icon" />
-                    <span>NeuroNews AI</span>
+                    <span>AG News Classifier</span>
                 </div>
                 <div className="nav-links">
                     <button className="nav-link-btn" onClick={() => setViewerUrl("/api/files/COMP338_Project2.pdf")}>Project Description</button>
@@ -107,8 +105,8 @@ const App = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6, delay: 0.1 }}
                     >
-                        Empower your news discovery with dual-algorithmic sentiment and category analysis.
-                        Train on AG News dataset and visualize decision boundaries in real-time.
+                        Compare two classic ML algorithms head-to-head on text category classification.
+                        Train on the AG News dataset and visualize the decision tree in real-time.
                     </motion.p>
 
                     <motion.div
@@ -125,7 +123,7 @@ const App = () => {
                             {status.is_training ? (
                                 <>
                                     <RefreshCcw className="icon spin" />
-                                    Neural Nodes Connecting...
+                                    Training Models...
                                 </>
                             ) : (
                                 <>
@@ -209,7 +207,7 @@ const App = () => {
                             <div className="visual-card glass span-2">
                                 <div className="card-header">
                                     <Trees className="icon blue" />
-                                    <h3>Neural Architecture Mapping</h3>
+                                    <h3>Decision Tree Visualization</h3>
                                 </div>
                                 <div className="tree-plot-container">
                                     <img src={status.plot_url} alt="Decision Tree" className="tree-plot" />

@@ -1,6 +1,6 @@
-# NeuroNews AI Dashboard
+# AG News Classifier
 
-A web-based AI dashboard for classifying news articles into four categories — **World**, **Sports**, **Business**, and **Sci/Tech** — using the AG News dataset. Built as part of the Artificial Intelligence course (COMP338).
+A web-based dashboard for classifying news articles into four categories — **World**, **Sports**, **Business**, and **Sci/Tech** — using the AG News dataset. Built as part of the Artificial Intelligence course (COMP338).
 
 ## Overview
 

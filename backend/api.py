@@ -28,9 +28,14 @@ app.add_middleware(
 
 from fastapi.responses import FileResponse
 
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+ALLOWED_FILES = {"AICourseProject2_Report.pdf", "COMP338_Project2.pdf"}
+
 @app.get("/files/{file_name}")
 async def get_file(file_name: str):
-    file_path = os.path.join("/Users/karimdwikat/Desktop/tala", file_name)
+    if file_name not in ALLOWED_FILES:
+        raise HTTPException(status_code=404, detail="File not found")
+    file_path = os.path.join(BASE_DIR, file_name)
     if os.path.exists(file_path):
         return FileResponse(file_path)
     raise HTTPException(status_code=404, detail="File not found")
